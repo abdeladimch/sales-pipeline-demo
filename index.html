@@ -467,6 +467,20 @@
                         const nextStage = stages[currentIndex + 1];
                         const nextStageElement = document.getElementById(`stage-${nextStage}`);
                         
+                        // Update stage counts
+                        const currentStageHeader = dealCard.parentElement.querySelector('.stage-header');
+                        const nextStageHeader = nextStageElement.querySelector('.stage-header');
+                        
+                        // Decrease current stage count
+                        const currentCount = dealCard.parentElement.querySelectorAll('.deal-card').length;
+                        const currentStageName = currentStageHeader.textContent.split('(')[0].trim();
+                        currentStageHeader.textContent = `${currentStageName} (${currentCount - 1})`;
+                        
+                        // Increase next stage count  
+                        const nextCount = nextStageElement.querySelectorAll('.deal-card').length;
+                        const nextStageName = nextStageHeader.textContent.split('(')[0].trim();
+                        nextStageHeader.textContent = `${nextStageName} (${nextCount + 1})`;
+                        
                         // Clone and move the deal
                         const movedDeal = dealCard.cloneNode(true);
                         movedDeal.classList.remove('moving');
